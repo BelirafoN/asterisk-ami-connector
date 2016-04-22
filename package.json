@@ -1,0 +1,40 @@
+{
+  "name": "asterisk-ami-connector",
+  "version": "1.0.0",
+  "description": "Asterisk AMI Connector for NodeJS (ES2015)",
+  "main": "./lib/index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "test": "mocha ./test",
+    "coverage": "istanbul cover _mocha -- -R spec"
+  },
+  "directories": {
+    "lib": "./lib",
+    "test": "./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:BelirafoN/asterisk-ami-connector.git"
+  },
+  "keywords": [
+    "voip",
+    "asterisk",
+    "ami"
+  ],
+  "author": {
+    "name": "Alex Voronysnaky",
+    "email": "belirafon@gmail.com"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "asterisk-ami-event-utils": "^2.0.0",
+    "asterisk-ami-events-stream": "^1.2.0"
+  }
+}

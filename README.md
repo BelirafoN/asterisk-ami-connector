@@ -22,7 +22,10 @@ const connector = require('asterisk-ami-connection')({reconnect: true});
 connector.connect('login', 'password', {host: '127.0.0.1', port: 5038})
     .then(amiConnection => {
         amiConnection
-            .on('event', event  => console.log(event))
+            .on('event', event  => {
+                console.log(event);
+                amiConnection.close();
+            })
             .on('response', response  => console.log(response))
             .on('close', ()  => console.log('closed'))
             .on('error', error  => console.log(error));
@@ -40,7 +43,10 @@ co(function*(){
     let amiConnection = yield connector.connect('login', 'password', {host: '127.0.0.1', port: 5038});
     
     amiConnection
-        .on('event', event  => console.log(event))
+        .on('event', event  => {
+            console.log(event);
+            amiConnection.close();
+        })
         .on('response', response  => console.log(response))
         .on('close', ()  => console.log('closed'))
         .on('error', error  => console.log(error));

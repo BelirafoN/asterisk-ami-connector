@@ -17,7 +17,7 @@ support `>=4.0.0`
 with promises
 
 ```javascript
-const connector = require('asterisk-ami-connection')({reconnect: true});
+const connector = require('asterisk-ami-connector')({reconnect: true});
 
 connector.connect('login', 'password', {host: '127.0.0.1', port: 5038})
     .then(amiConnection => {
@@ -36,7 +36,7 @@ connector.connect('login', 'password', {host: '127.0.0.1', port: 5038})
 or using `co` for synchronous code style
 
 ```javascript
-const connector = require('asterisk-ami-connection')({reconnect: true});
+const connector = require('asterisk-ami-connector')({reconnect: true});
 const co = require('co');
 
 co(function*(){

@@ -1,5 +1,8 @@
 # Asterisk AMI Connector for NodeJS (ES2015) 
 
+[![Code Climate](https://codeclimate.com/github/BelirafoN/asterisk-ami-connector/badges/gpa.svg)](https://codeclimate.com/github/BelirafoN/asterisk-ami-connector)
+[![npm version](https://badge.fury.io/js/asterisk-ami-connector.svg)](https://badge.fury.io/js/asterisk-ami-connector)
+
 This library is a part of **Asterisk's AMI Client** library, which will be release soon.
 
 ### Install 
@@ -14,7 +17,7 @@ support `>=4.0.0`
 
 ### Usage
 
-with promises
+Base example with promises. 
 
 ```javascript
 const connector = require('asterisk-ami-connector')({reconnect: true});
@@ -55,6 +58,41 @@ co(function*(){
 ```
 
 or with `co` like synchronous style
+
+### Some details about module functionality 
+
+#### Options of connection setup to Asterisk AMI:
+
+* **reconnect** - default is `false`. Reconnection during connection setup.
+* **maxAttemptsCount** - default is `null` (infinity). Max count of attempts of reconnection.
+* **attemptsDelay** - default is 1000 (ms). Time delay between attempts of reconnection.
+
+#### Method **connect** 
+
+It takes the following parameters:
+
+* **login** - Asterisks AMI login;
+* **secret** - Asterisks AMI password;
+* **options** - standard options for `net.connect` method.
+
+It always returns *promise*. That promise will be resolved 
+with instance of *AmiConnection*, or will be reject with *AmiAuthError*.
+
+####  **AmiConnection** 
+
+It is a base class for AMI Connection, which was inherit from EventEmitter.
+
+Available methods:
+
+* **.close()** - close current Asterisk AMI connection;
+
+Available events:
+
+* **event** - it fires when AMI event was received. Handler receives AMI event object.
+* **response** - it fires when AMI response was received. Handler receives AMI response object.
+* **close** - it fires when AMI connection was closed.
+* **error** - it fires when error occurred. Handler receives error.
+* **data** - it fires when data was received from AMI socket. Handler receives buffer of received data.
 
 ### Examples 
 

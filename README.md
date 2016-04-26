@@ -78,7 +78,7 @@ It takes the following parameters:
 It always returns *promise*. That promise will be resolved 
 with instance of *AmiConnection*, or will be reject with *AmiAuthError*.
 
-####  **AmiConnection** 
+####  Class AmiConnection 
 
 It is a base class for AMI Connection, which was inherit from EventEmitter.
 
@@ -92,7 +92,11 @@ Available events:
 * **response** - it fires when AMI response was received. Handler receives AMI response object.
 * **close** - it fires when AMI connection was closed.
 * **error** - it fires when error occurred. Handler receives error.
-* **data** - it fires when data was received from AMI socket. Handler receives buffer of received data.
+* **data** - it fires when data was received from AMI socket. Handler receives buffer of received data. 
+
+#### Class AmiAuthError
+
+It class of Asterisk AMI auth-errors, which was inherit from Error.
 
 ### Examples 
 

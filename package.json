@@ -1,6 +1,6 @@
 {
   "name": "asterisk-ami-connector",
-  "version": "1.0.0",
+  "version": "0.0.8",
   "description": "Asterisk AMI Connector for NodeJS (ES2015)",
   "main": "./lib/index.js",
   "engines": {
@@ -27,14 +27,16 @@
     "name": "Alex Voronysnaky",
     "email": "belirafon@gmail.com"
   },
+  "dependencies": {
+    "asterisk-ami-event-utils": "^2.0",
+    "asterisk-ami-events-stream": "^1.0",
+    "co": "^4.6.0"
+  },
   "devDependencies": {
     "coveralls": "^2.11.9",
+    "debug": "^2.2.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5"
   },
-  "license": "MIT",
-  "dependencies": {
-    "asterisk-ami-event-utils": "^2.0.0",
-    "asterisk-ami-events-stream": "^1.2.0"
-  }
+  "license": "MIT"
 }

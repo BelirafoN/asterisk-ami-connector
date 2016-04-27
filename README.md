@@ -80,7 +80,7 @@ with instance of *AmiConnection*, or will be reject with *AmiAuthError*.
 
 ####  Class AmiConnection 
 
-It is a base class for AMI Connection, which was inherit from EventEmitter.
+It is a class-wrapper for Asterisk's AMI socket, which was inherit from EventEmitter.
 
 Available methods:
 

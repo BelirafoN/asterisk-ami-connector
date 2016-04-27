@@ -85,6 +85,7 @@ It is a class-wrapper for Asterisk's AMI socket, which was inherit from EventEmi
 Available methods:
 
 * **.close()** - close current Asterisk AMI connection;
+* **.write(message)** - write message into current Asterisk's AMI socket;
 
 Available events:
 
@@ -97,6 +98,10 @@ Available events:
 #### Class AmiAuthError
 
 It class of Asterisk AMI auth-errors, which was inherit from Error.
+
+### Debugging
+
+Use env-variable `DEBUG=*` for print to console of steps of connection establishment.
 
 ### Examples 
 

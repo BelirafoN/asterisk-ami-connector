@@ -6,7 +6,7 @@
 
 "use strict";
 
-const connector = require('asterisk-ami-connection')({});
+const connector = require('asterisk-ami-connection')();
 
 connector.connect('login', 'password', {host: '127.0.0.1', port: 5038})
     .then(amiConnection => {

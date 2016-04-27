@@ -5,17 +5,17 @@
 
 This library is a part of **Asterisk's AMI Client** library, which will be release soon.
 
-### Install 
+## Install 
 
 ```bash 
 $ npm i asterisk-ami-connector
 ```
 
-### NodeJS versions 
+## NodeJS versions 
 
 support `>=4.0.0`
 
-### Usage
+## Usage
 
 Base example with promises. 
 
@@ -59,7 +59,7 @@ co(function*(){
 
 or with `co` like synchronous style
 
-### Some details about module functionality 
+## Some details about module functionality 
 
 #### Options of connection setup to Asterisk AMI:
 
@@ -100,18 +100,18 @@ Available events:
 
 It class of Asterisk AMI auth-errors, which was inherit from Error.
 
-### Debugging
+## Debugging
 
 Use env-variable `DEBUG=*` for print to console of steps of connection establishment.
 
-### Examples 
+## Examples 
 
 For examples, please, see `./examples/*` or tests `./test/*`.
 
-### Tests 
+## Tests 
 
 comming soon. 
 
-### License 
+## License 
 
 Licensed under the MIT License 

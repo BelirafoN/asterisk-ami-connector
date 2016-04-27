@@ -67,7 +67,7 @@ or with `co` like synchronous style
 * **maxAttemptsCount** - default is `null` (infinity). Max count of attempts of reconnection.
 * **attemptsDelay** - default is 1000 (ms). Time delay between attempts of reconnection.
 
-#### Method **connect** 
+#### Method `connect`
 
 It takes the following parameters:
 
@@ -78,7 +78,7 @@ It takes the following parameters:
 It always returns *promise*. That promise will be resolved 
 with instance of *AmiConnection*, or will be reject with *AmiAuthError*.
 
-####  Class AmiConnection 
+####  Class `AmiConnection` 
 
 It is a class-wrapper for Asterisk's AMI socket, which was inherit from EventEmitter.
 
@@ -96,7 +96,7 @@ Available events:
 * **error** - it fires when error occurred. Handler receives error.
 * **data** - it fires when data was received from AMI socket. Handler receives buffer of received data. 
 
-#### Class AmiAuthError
+#### Class `AmiAuthError`
 
 It class of Asterisk AMI auth-errors, which was inherit from Error.
 

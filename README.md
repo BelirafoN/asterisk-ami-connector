@@ -82,10 +82,11 @@ with instance of *AmiConnection*, or will be reject with *AmiAuthError*.
 
 It is a class-wrapper for Asterisk's AMI socket, which was inherit from EventEmitter.
 
-Available methods:
+Available methods & props:
 
 * **.close()** - close current Asterisk AMI connection;
 * **.write(message)** - write message into current Asterisk's AMI socket;
+* **.isEstablished** - `true` when connection to Asterisk AMI established;
 
 Available events:
 

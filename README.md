@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/BelirafoN/asterisk-ami-connector/badges/gpa.svg)](https://codeclimate.com/github/BelirafoN/asterisk-ami-connector)
 [![npm version](https://badge.fury.io/js/asterisk-ami-connector.svg)](https://badge.fury.io/js/asterisk-ami-connector)
 
-This library is a part of **Asterisk's AMI Client** library, which will be release soon.
+This library is a part of **[Asterisk's AMI Client](https://www.npmjs.com/package/asterisk-ami-client)** library.
 
 ## Install 
 

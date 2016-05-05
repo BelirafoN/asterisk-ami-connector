@@ -33,6 +33,7 @@
     "co": "^4.6.0"
   },
   "devDependencies": {
+    "asterisk-ami-test-server": "^0.1.2",
     "coveralls": "^2.11.9",
     "debug": "^2.2.0",
     "istanbul": "^0.4.3",

@@ -1,5 +1,6 @@
 # Asterisk AMI Connector for NodeJS (ES2015) 
 
+[![Build Status](https://travis-ci.org/BelirafoN/asterisk-ami-connector.svg?branch=master)](https://travis-ci.org/BelirafoN/asterisk-ami-connector)
 [![Code Climate](https://codeclimate.com/github/BelirafoN/asterisk-ami-connector/badges/gpa.svg)](https://codeclimate.com/github/BelirafoN/asterisk-ami-connector)
 [![npm version](https://badge.fury.io/js/asterisk-ami-connector.svg)](https://badge.fury.io/js/asterisk-ami-connector)
 

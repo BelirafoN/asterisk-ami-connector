@@ -62,6 +62,16 @@ describe('Ami connector Internal functioanlity', function(){
             });
     });
 
+    it('Reconnection with correct credentials', done => {
+        server.close();
+        connectorFactory({
+            reconnect: true
+        }).connect('test', 'test', socketOptions).then(() => done());
+        setTimeout(() => {
+            server.listen({port: socketOptions.port});
+        }, 1500);
+    });
+
     it('Connector returns instance of AmiConnection', done => {
         connector.connect('test', 'test', socketOptions).then(amiConnection => {
             assert.ok(amiConnection instanceof AmiConnection);

@@ -1,6 +1,6 @@
 {
   "name": "asterisk-ami-connector",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Asterisk AMI Connector for NodeJS (ES2015)",
   "main": "./lib/index.js",
   "engines": {

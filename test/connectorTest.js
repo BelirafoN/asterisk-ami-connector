@@ -12,32 +12,27 @@ const AmiConnection = require('../lib/AmiConnection');
 const assert = require('assert');
 const CRLF = '\r\n';
 
+let serverOptions = {
+        credentials: {
+            username: 'test',
+            secret: 'test'
+        }
+    },
+    socketOptions = {
+        host: '127.0.0.1',
+        port: 5038
+    };
+
 describe('Ami connector Internal functioanlity', function(){
     this.timeout(3000);
 
     let server = null,
         connector = null,
-        serverOptions = {
-            credentials: {
-                username: 'test',
-                secret: 'test'
-            }
-        },
-        socketOptions = {
-            host: '127.0.0.1',
-            port: 5038
-        },
         connectorOptions = {
             reconnect: false,
             maxAttemptsCount: null,
             attemptsDelay: 1000
         };
-
-    beforeEach(done => {
-        connector = connectorFactory(connectorOptions);
-        server = new AmiTestServer(serverOptions);
-        server.listen({port: socketOptions.port}).then(done);
-    });
 
     afterEach(done => {
         if(server instanceof AmiTestServer){
@@ -49,33 +44,93 @@ describe('Ami connector Internal functioanlity', function(){
         done();
     });
 
-    it('Connect without reconnection & correct credentials', done => {
-        connector.connect('test', 'test', socketOptions).then(() => done());
+    describe('Regular connection functionality', function(){
+
+        beforeEach(done => {
+            console.log('FIRST BEFOREEACH');
+            connector = connectorFactory(connectorOptions);
+            server = new AmiTestServer(serverOptions);
+            server.listen({port: socketOptions.port}).then(done);
+        });
+
+        it('Connect without reconnection & correct credentials', done => {
+            connector.connect('test', 'test', socketOptions).then(() => done());
+        });
+
+        it('Connector returns instance of AmiConnection', done => {
+            connector.connect('test', 'test', socketOptions).then(amiConnection => {
+                assert.ok(amiConnection instanceof AmiConnection);
+                done();
+            });
+        });
+
+        it('Connect without reconnection & invalid credentials', done => {
+            connector.connect('username', 'secret', socketOptions)
+                .catch(error => {
+                    assert.ok(error instanceof Error);
+                    assert.equal('ami message: authentication failed', error.message.toLowerCase());
+                    done();
+                });
+        });
     });
 
-    it('Connect without reconnection & invalid credentials', done => {
-        connector.connect('username', 'secret', socketOptions)
-            .catch(error => {
+    describe('Reconnection functioanlity', function(){
+
+        beforeEach(() => {
+            server = new AmiTestServer(serverOptions);
+        });
+
+        it('Reconnection with correct credentials', done => {
+            connector = connectorFactory({
+                reconnect: true
+            });
+            connector.connect('test', 'test', socketOptions).then(() => done());
+            setTimeout(() => {
+                server.listen({port: socketOptions.port});
+            }, 1500);
+        });
+
+        it('Reconnection with invalid credentials', done => {
+            connector = connectorFactory({
+                reconnect: true
+            });
+            connector.connect('username', 'secret', socketOptions).catch(error => {
                 assert.ok(error instanceof Error);
                 assert.equal('ami message: authentication failed', error.message.toLowerCase());
                 done();
             });
-    });
+            setTimeout(() => {
+                server.listen({port: socketOptions.port});
+            }, 1500);
+        });
 
-    it('Reconnection with correct credentials', done => {
-        server.close();
-        connectorFactory({
-            reconnect: true
-        }).connect('test', 'test', socketOptions).then(() => done());
-        setTimeout(() => {
-            server.listen({port: socketOptions.port});
-        }, 1500);
-    });
+        it('Limit of attempts of reconnection', done => {
+            connector = connectorFactory({
+                reconnect: true,
+                maxAttemptsCount: 1
+            });
+            connector.connect('test', 'test', socketOptions).catch(error => {
+                assert.ok(error instanceof Error);
+                assert.equal('reconnection error after max count attempts.', error.message.toLowerCase());
+                done();
+            });
+            setTimeout(() => {
+                server.listen({port: socketOptions.port});
+            }, 1500);
+        });
 
-    it('Connector returns instance of AmiConnection', done => {
-        connector.connect('test', 'test', socketOptions).then(amiConnection => {
-            assert.ok(amiConnection instanceof AmiConnection);
-            done();
+        it('Ban for reconnection', done => {
+            connector = connectorFactory({
+                reconnect: false
+            });
+            connector.connect('test', 'test', socketOptions).catch(error => {
+                assert.ok(error instanceof Error);
+                assert.equal('connect ECONNREFUSED 127.0.0.1:5038', error.message);
+                done();
+            });
+            setTimeout(() => {
+                server.listen({port: socketOptions.port});
+            }, 1500);
         });
     });
 

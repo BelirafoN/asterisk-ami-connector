@@ -118,7 +118,23 @@ For examples, please, see `./examples/*` or tests `./test/*`.
 
 ## Tests 
 
-comming soon. 
+Tests require [Mocha](https://mochajs.org/). 
+
+```bash 
+mocha ./tests
+``` 
+
+or with `npm` 
+
+```bash
+npm test 
+```
+
+Test coverage with [Istanbul](https://gotwarlost.github.io/istanbul/) 
+
+```bash
+npm run coverage
+```
 
 ## License 
 

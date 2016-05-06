@@ -47,7 +47,6 @@ describe('Ami connector Internal functioanlity', function(){
     describe('Regular connection functionality', function(){
 
         beforeEach(done => {
-            console.log('FIRST BEFOREEACH');
             connector = connectorFactory(connectorOptions);
             server = new AmiTestServer(serverOptions);
             server.listen({port: socketOptions.port}).then(done);
@@ -132,6 +131,67 @@ describe('Ami connector Internal functioanlity', function(){
                 server.listen({port: socketOptions.port});
             }, 1500);
         });
+    });
+
+    describe('AmiConnection internal functionality', function(){
+        let connection = null;
+
+        beforeEach(done => {
+            connector = connectorFactory(connectorOptions);
+            server = new AmiTestServer(serverOptions);
+            server.listen({port: socketOptions.port}).then(() => {
+                connector.connect('test', 'test', socketOptions)
+                    .then(amiConnection => {
+                    connection = amiConnection;
+                    done();
+                });
+            });
+        });
+
+        afterEach(() => {
+            if(connection instanceof AmiConnection){
+                connection.close();
+                connection.removeAllListeners();
+                connection = null;
+            }
+        });
+
+        it('Last response', done => {
+            connection
+                .once('response', response => {
+                    assert.deepEqual(connection.lastResponse, response);
+                    done();
+                })
+                .write({Action: 'Ping'});
+        });
+
+        it('Last event', done => {
+            server.broadcast([
+                    'Event: Test',
+                    'Value: AmiConnectionTest'
+                ].join(CRLF) + CRLF.repeat(2));
+
+            connection.once('event', event => {
+                assert.deepEqual(connection.lastEvent, event);
+                done();
+            });
+        });
+
+        it('Last wrote data', () => {
+            let dataPackage = {Action: 'Ping'};
+            connection.write(dataPackage);
+            assert.deepEqual(connection.lastWroteData, dataPackage);
+        });
+
+        it('Connection state is "connected"', () => {
+            assert.ok(connection.isConnected);
+        });
+
+        it('Close connection', () => {
+            connection.close();
+            assert.ok(!connection.isConnected);
+        })
+
     });
 
 });

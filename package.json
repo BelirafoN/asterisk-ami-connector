@@ -34,10 +34,10 @@
   },
   "devDependencies": {
     "asterisk-ami-test-server": "^0.1.2",
-    "coveralls": "^2.11.9",
+    "coveralls": "^3.0.2",
     "debug": "^2.2.0",
     "istanbul": "^0.4.3",
-    "mocha": "^2.4.5"
+    "mocha": "^5.2.0"
   },
   "license": "MIT"
 }
